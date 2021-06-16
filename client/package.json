@@ -1,0 +1,41 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.18.0",
+    "classnames": "^2.2.6",
+    "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.15",
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.33",
+    "react": "^16.6.3",
+    "react-bootstrap-4-pagination": "^1.0.4",
+    "react-dom": "^16.6.3",
+    "react-moment": "^1.1.1",
+    "react-redux": "^5.1.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.1",
+    "react-time-ago": "^6.2.2",
+    "react-toast-notifications": "^2.4.4",
+    "react-toastify": "^7.0.4",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "proxy": "http://localhost:5000",
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

@@ -1,0 +1,13 @@
+.pagination li.active {
+    background-color: #343a40!important;
+}
+.nav {
+    background-color: #343a40!important;;
+}
+
+.pd-10{
+    padding: 0px 10px 10px 10px;
+}
+nav.row.justify-content-center.undefined {
+    background-color: #343a40;
+}
