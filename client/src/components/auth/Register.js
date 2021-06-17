@@ -60,108 +60,93 @@ class Register extends Component {
   render() {
     const { password, role, password2, email, name, errors } = this.state;
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col s8 offset-s2">
-            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-              <h4>
-                <b>Register</b> below
-              </h4>
-              <p className="grey-text text-darken-1">
-                Already have an account? <Link to="/login">Log in</Link>
-              </p>
-            </div>
-            <form noValidate onSubmit={this.onSubmit}>
-              <div className="input-field col s12">
+      <section className="login-block">
+          <div className="container" style={{width: '50%'}}>
+            <div className="row">
+              <div className="col-md-12 login-sec">
+                <h2 className="text-center">Register Now</h2>
+                <p className="grey-text text-darken-1">
+                  Already have an account? <Link to="/login">Login</Link>
+                </p>
+                <form className="login-form" noValidate onSubmit={this.onSubmit}>
+                  <div className="form-group">
+                    <label htmlFor="exampleInputEmail1" className="text-uppercase">Name</label>
+                    <input
+                        onChange={this.onChange}
+                        value={name}
+                        error={errors.name}
+                        id="name"
+                        type="text"
+                        className={classnames("", {
+                          invalid: errors.name
+                        })}
+                    />
+                  </div>
+              <div className="form-group">
+                <label htmlFor="exampleInputEmail1" className="text-uppercase">Email</label>
                 <input
-                  onChange={this.onChange}
-                  value={name}
-                  error={errors.name}
-                  id="name"
-                  type="text"
-                  className={classnames("", {
-                    invalid: errors.name
-                  })}
+                    onChange={this.onChange}
+                    value={email}
+                    error={errors.email}
+                    id="email"
+                    type="email"
+                    className={classnames("", {
+                      invalid: errors.email
+                    })}
                 />
-                <label htmlFor="name">Name</label>
-                <span className="red-text">{errors.name}</span>
-              </div>
-              <div className="input-field col s12">
+               </div>
+              <div className="form-group">
+                <label htmlFor="exampleInputEmail1" className="text-uppercase">Password</label>
                 <input
-                  onChange={this.onChange}
-                  value={email}
-                  error={errors.email}
-                  id="email"
-                  type="email"
-                  className={classnames("", {
-                    invalid: errors.email
-                  })}
+                    onChange={this.onChange}
+                    value={password}
+                    error={errors.password}
+                    id="password"
+                    type="password"
+                    className={classnames("", {
+                      invalid: errors.password
+                    })}
                 />
-                <label htmlFor="email">Email</label>
-                <span className="red-text">{errors.email}</span>
               </div>
-              <div className="input-field col s12">
+              <div className="form-group">
+                <label htmlFor="exampleInputEmail1" className="text-uppercase">Confirm Password</label>
                 <input
-                  onChange={this.onChange}
-                  value={password}
-                  error={errors.password}
-                  id="password"
-                  type="password"
-                  className={classnames("", {
-                    invalid: errors.password
-                  })}
+                    onChange={this.onChange}
+                    value={password2}
+                    error={errors.password2}
+                    id="password2"
+                    type="password"
+                    className={classnames("", {
+                      invalid: errors.password2
+                    })}
                 />
-                <label htmlFor="password">Password</label>
-                <span className="red-text">{errors.password}</span>
               </div>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={password2}
-                  error={errors.password2}
-                  id="password2"
-                  type="password"
-                  className={classnames("", {
-                    invalid: errors.password2
-                  })}
-                />
-                <label htmlFor="password2">Confirm Password</label>
-                <span className="red-text">{errors.password2}</span>
-              </div>
+              <div className="form-group">
+                <label style={{ margin: 15 }} htmlFor="role">
 
-              <label style={{ margin: 15 }} htmlFor="role">
                 <input
-                  onChange={this.onCheckboxChange}
-                  value={role === "manager"}
-                  error={errors.role}
-                  id="role"
-                  type="checkbox"
-                  className={classnames("", {
-                    invalid: errors.role
-                  })}
+                    onChange={this.onCheckboxChange}
+                    value={role === "manager"}
+                    error={errors.role}
+                    id="role"
+                    type="checkbox"
+                    className={classnames("", {
+                      invalid: errors.role
+                    })}
                 />
                 <span> Is Restaurant Manager</span>
-              </label>
-              <span className="red-text">{errors.role}</span>
-
-              <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                <button
-                  style={{
-                    width: "150px",
-                    borderRadius: "3px",
-                    letterSpacing: "1.5px",
-                    marginTop: "1rem"
-                  }}
-                  type="submit"
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                >
-                  Sign up
-                </button>
+                </label>
               </div>
-            </form>
+                  <div className="form-check">
+                    <button type="submit" className="btn btn-login float-right">Submit</button>
+                  </div>
+
+                </form>
+                <div className="copy-text">Created with <i className="fa fa-heart"></i> by Bilal</div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </section>
     );
   }
 }

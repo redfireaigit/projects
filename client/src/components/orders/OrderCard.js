@@ -1,7 +1,6 @@
 import * as PropTypes from "prop-types";
 import React from "react";
 import { Link } from "react-router-dom";
-import ReactTimeAgo from "react-time-ago";
 
 export function OrderCard(props) {
   const { _id, _restaurant, status, total_amount, _user } = props.order;
@@ -49,12 +48,13 @@ export function OrderCard(props) {
             }
 
         })}</td>
-        <td style={{textAlign: 'center'}}>{(props.currentUser.role === 'manager' && _user.role === 'user') && <button
+        <td style={{textAlign: 'center'}}> <button
+            disabled={(props.currentUser.role !== 'manager' && _user._id !== props.currentUser._id)}
             onClick={()=> props.onBlockUser()}
             style={{ fontWeight: 700 }}>
           {isBlocked && <span style={{fontSize: '10px'}}>UnBlock user</span>}
           {!isBlocked && <span style={{fontSize: '10px'}}>Block user</span>}
-        </button>}</td>
+        </button></td>
         <td style={{textAlign: 'center'}}><Link to={`/orderHistory/${_id}`} style={{ fontWeight: 700 }}>View history</Link></td>
 
       </tr>

@@ -103,9 +103,9 @@ class ViewMeals extends Component {
   render() {
     const { loading, meals } = this.state;
 
-    if (meals.length === 0 && !loading)
+    if (!meals.length && !loading)
       return <div className='container center'>
-        <button onClick={this.addMeal}>add meal</button>
+        <button className='btn btn-primary' onClick={this.addMeal}>add meal</button>
         <div className="center">No Meals Found.</div>
       </div>;
 
@@ -116,7 +116,7 @@ class ViewMeals extends Component {
             <Loader />
           ) : (
                <div className="container">
-                 <button onClick={this.addMeal}>add meal</button>
+                 <button className='btn btn-primary' onClick={this.addMeal}>add meal</button>
                 <div className="row">
                   {(meals || []).map((meal, index) => (
                     <EditMealCard

@@ -17,8 +17,8 @@ export function EditMealCard(props) {
             <h6 className="card-subtitle mb-2 text-muted">$ {price}</h6>
             <p className="card-text">{description}</p>
             <div className="card-action">
-              <a className="waves-effect waves-light btn-small">
-                <i className='fas fa-trash' onClick={onDeleteMeal}/>
+              <a className="waves-effect waves-light btn-small" onClick={onDeleteMeal} >
+                <i className='fas fa-trash' />
               </a>
               <a style={{marginLeft: '8px',width: '48px'}} className="waves-effect waves-light btn-small">
                 <Link to={`/restaurants/${restaurantId}/meals/update/${_id}`}><i className='fas fa-edit'/></Link>

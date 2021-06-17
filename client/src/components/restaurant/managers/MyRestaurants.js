@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-import axios from "axios";
-
 import { Loader } from "../../Loader";
 import { UpdateRestaurantCard } from "./UpdateRestaurantCard";
 import {Link} from "react-router-dom";
 import {toast} from "react-toastify";
-import {cloneDeep} from "lodash";
 import Pagination from 'react-bootstrap-4-pagination';
 import {connect} from "react-redux";
 import {getOwnerRestautants, setLoading, deleteRestautants} from "../../../actions/restaurantActions";

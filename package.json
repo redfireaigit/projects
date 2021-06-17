@@ -1,5 +1,5 @@
 {
-  "author": "Anuj Shah <anujshah584@gmail.com>",
+  "author": "Bilal Toptal Test",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
@@ -17,7 +17,7 @@
     "passport-jwt": "^4.0.0",
     "validator": "^10.9.0"
   },
-  "description": "Full Stack Food Delivery SPA",
+  "description": "",
   "devDependencies": {
     "mocha": "^7.1.1",
     "should": "^13.2.3",
@@ -25,15 +25,10 @@
   },
   "license": "MIT",
   "main": "server.js",
-  "name": "food-delivery",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ShahAnuj2610/tomato-food-delivery.git"
-  },
+  "name": "food-delivery-test",
   "scripts": {
     "client-install": "npm install --prefix client",
     "start": "node server.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",

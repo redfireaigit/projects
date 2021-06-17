@@ -4,15 +4,14 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const path = require("path");
 
-const users = require("./routes/api/user");
-const restaurants = require("./routes/api/restaurant");
-const meals = require("./routes/api/meal");
-const orders = require("./routes/api/order");
-const orderHistory = require("./routes/api/orderHistory");
+const users = require("./routes/api/routes/user");
+const restaurants = require("./routes/api/routes/restaurant");
+const meals = require("./routes/api/routes/meal");
+const orders = require("./routes/api/routes/orders");
+const orderHistory = require("./routes/api/routes/orderHistory");
 
 const app = express();
 
-// Bodyparser middleware
 app.use(
   bodyParser.urlencoded({
     extended: false

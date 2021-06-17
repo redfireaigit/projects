@@ -2,7 +2,7 @@ const config = require("../../../config/keys");
 const jwt = require("jsonwebtoken");
 const expressJwt = require("express-jwt");
 const compose = require("composable-middleware");
-const User = require("../user/user.model");
+const User = require("../models/user.model");
 const validateJwt = expressJwt({ secret: config.secretOrKey });
 
 /**
@@ -72,7 +72,6 @@ function isLocalStrategy() {
  * Returns a jwt token signed by the app secret
  */
 function signToken(id) {
-  //return jwt.sign({ _id: id }, config.secretOrKey, { expiresInMinutes: 60*5 });
   return jwt.sign({ _id: id }, config.secretOrKey);
 }
 
