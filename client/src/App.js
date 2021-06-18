@@ -25,7 +25,26 @@ import OrderHistory from "./components/orders/OrderHistory";
 import CreateOrUpdateRestaurant from "./components/restaurant/managers/CreateOrUpdateRestaurant";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import { toast } from "react-toastify";
 
+
+axios.interceptors.response.use(
+    async (response) => { return response },
+    async (error) => {
+
+      const originalRequest = error.config
+      const status = error.response.status
+      if (status === 500 || status === 404 || status === 401 || status === 403)
+      {
+        toast.error(error.response.statusText);
+        console.log(error.response)
+        return Promise.reject(error)
+
+      }
+      else 
+      return axios(originalRequest)
+    })
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
   // Set auth token header auth

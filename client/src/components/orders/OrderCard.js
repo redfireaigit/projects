@@ -6,7 +6,6 @@ export function OrderCard(props) {
   const { _id, _restaurant, status, total_amount, _user } = props.order;
 
   let isBlocked = _restaurant.blockList.filter(b => b == _user._id).length ? true : false
-
   return (
       <tr>
         <td style={{textAlign: 'center'}}>{_user.name}</td>
@@ -49,7 +48,7 @@ export function OrderCard(props) {
 
         })}</td>
         <td style={{textAlign: 'center'}}> <button
-            disabled={(props.currentUser.role !== 'manager' && _user._id !== props.currentUser._id)}
+            disabled={!( props.currentUser.role === 'manager' && _user.role === 'user' )}
             onClick={()=> props.onBlockUser()}
             style={{ fontWeight: 700 }}>
           {isBlocked && <span style={{fontSize: '10px'}}>UnBlock user</span>}

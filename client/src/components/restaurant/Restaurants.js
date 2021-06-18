@@ -26,7 +26,6 @@ class Restaurants extends Component {
         let {currentPage, perPage} = paginationConfig;
         this.props.getRestautants(currentPage, perPage);
 
-        setLoading({ loading: false });
     } catch (e) {
       if(e.response.data.error.message) {
         toast.error(e.response.data.error.message);
@@ -68,8 +67,7 @@ class Restaurants extends Component {
 
     return (
       <div className="container" style={{ width: "100%" }}>
-        <div className="row">
-          <div >
+
             {loading ? (
               <Loader />
             ) : (
@@ -79,8 +77,6 @@ class Restaurants extends Component {
                 ))}
               </div>
             )}
-          </div>
-        </div>
           <div className="row">
               <Pagination {...this.state.paginationConfig} />
           </div>

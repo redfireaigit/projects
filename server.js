@@ -4,11 +4,11 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const path = require("path");
 
-const users = require("./routes/api/routes/user");
-const restaurants = require("./routes/api/routes/restaurant");
-const meals = require("./routes/api/routes/meal");
-const orders = require("./routes/api/routes/orders");
-const orderHistory = require("./routes/api/routes/orderHistory");
+const users = require("./services/api/routes/user");
+const restaurants = require("./services/api/routes/restaurant");
+const meals = require("./services/api/routes/meal");
+const orders = require("./services/api/routes/orders");
+const orderHistory = require("./services/api/routes/orderHistory");
 
 const app = express();
 

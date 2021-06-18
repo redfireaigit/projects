@@ -1,6 +1,7 @@
 const Restaurant = require("../models/restaurant.model");
 const _ = require("lodash");
 const {ResponseHandler} = require('../../httpStatusCodes')
+const ObjectId = require('mongoose').Types.ObjectId;
 
 // Get list of restaurants by manager
 exports.getManagerRestaurants = function(req, res) {
@@ -62,20 +63,22 @@ exports.index = function(req, res) {
 
 // Get a single restaurant
 exports.show = function(req, res) {
-  Restaurant.findById(req.params.id)
-    .populate("_meals")
-    .exec(function(err, restaurant) {
+  if(ObjectId.isValid(req.params.id)) {
+    Restaurant.findById(req.params.id)
+        .populate("_meals")
+        .exec(function (err, restaurant) {
 
-      if (err) {
-        ResponseHandler(res, 500, null, err)
-      }
-      else if (!restaurant) {
-        ResponseHandler(res, 404)
-      }
-      else {
-        ResponseHandler(res, 200, restaurant )
-      }
-    });
+          if (err) {
+            ResponseHandler(res, 500, null, err)
+          } else if (!restaurant) {
+            ResponseHandler(res, 404)
+          } else {
+            ResponseHandler(res, 200, restaurant)
+          }
+        });
+  } else {
+    ResponseHandler(res, 404)
+  }
 };
 
 exports.create = function(req, res) {
@@ -102,81 +105,95 @@ exports.update = function(req, res) {
   if (req.body._id) {
     delete req.body._id;
   }
-  Restaurant.findById(req.params.id, function(err, restaurant) {
-    if (err) {
-      ResponseHandler(res, 500, null, err)
-    }
-    else if (!restaurant) {
-      ResponseHandler(res, 404)
-    }
-    else if (restaurant.user != req.user._id) {
-      ResponseHandler(res, 401)
-    }
-    else {
-      const updated = _.merge(restaurant, req.body);
-      updated.save(function(err) {
-        if (err) {
-          ResponseHandler(res, 500, null, err)
-        }
-        else
-          ResponseHandler(res, 200, restaurant )
-      });
-    }
+  if(ObjectId.isValid(req.params.id)) {
+    Restaurant.findById(req.params.id, function(err, restaurant) {
+      if (err) {
+        ResponseHandler(res, 500, null, err)
+      }
+      else if (!restaurant) {
+        ResponseHandler(res, 404)
+      }
+      else if (restaurant.user != req.user._id) {
+        ResponseHandler(res, 401)
+      }
+      else {
+        const updated = _.merge(restaurant, req.body);
+        updated.save(function(err) {
+          if (err) {
+            ResponseHandler(res, 500, null, err)
+          }
+          else
+            ResponseHandler(res, 200, restaurant )
+        });
+      }
 
-  });
+    });
+  } else {
+    ResponseHandler(res, 404)
+  }
 };
 
 // Deletes a restaurant from the DB.
 exports.destroy = function(req, res) {
-  Restaurant.findById(req.params.id, function(err, restaurant) {
-    if (err) {
-      ResponseHandler(res, 500, null, err)
-    }
-    else if (!restaurant) {
-      ResponseHandler(res, 404)
-    }
+  if(ObjectId.isValid(req.params.id)) {
+    Restaurant.findById(req.params.id, function(err, restaurant) {
+      if (err) {
+        ResponseHandler(res, 500, null, err)
+      }
+      else if (!restaurant) {
+        ResponseHandler(res, 404)
+      }
 
-    else if (restaurant.user != req.user._id) {
-      ResponseHandler(res, 401)
-    }
-    else {
-      restaurant.isActive = 0;
-      restaurant.save(function(err) {
-        if (err) {
-          ResponseHandler(res, 500, null, err)
-        } else
-          ResponseHandler(res, 200, restaurant)
-      });
-    }
-  });
+      else if (restaurant.user != req.user._id) {
+        ResponseHandler(res, 401)
+      }
+      else {
+        restaurant.isActive = 0;
+        restaurant.save(function(err) {
+          if (err) {
+            ResponseHandler(res, 500, null, err)
+          } else
+            ResponseHandler(res, 200, restaurant)
+        });
+      }
+    });
+  } else {
+    ResponseHandler(res, 404)
+  }
+
 };
 // block User for a restaurant from the DB.
 exports.blockUser = function(req, res) {
-  Restaurant.findById(req.params.id, function(err, restaurant) {
-    if (err) {
-      ResponseHandler(res, 500, null, err)
-    }
-    else if (!restaurant) {
-      ResponseHandler(res, 404)
-    }
-
-    else if (restaurant.user != req.user._id) {
-      ResponseHandler(res, 401)
-    } else {
-      let userExist = restaurant.blockList.filter(f => f == req.body.id);
-      if(userExist.length){
-        restaurant.blockList = restaurant.blockList.filter(f => f != req.body.id)
-      } else {
-        restaurant.blockList.push(req.body.id)
+  if(ObjectId.isValid(req.params.id)) {
+    Restaurant.findById(req.params.id, function(err, restaurant) {
+      if (err) {
+        ResponseHandler(res, 500, null, err)
+      }
+      else if (!restaurant) {
+        ResponseHandler(res, 404)
       }
 
-      restaurant.save(function(err) {
-        if (err) {
-          ResponseHandler(res, 500, null, err)
-        } else
-        ResponseHandler(res, 200, restaurant)
-      });
-    }
+      else if (restaurant.user != req.user._id) {
+        ResponseHandler(res, 401)
+      } else {
+        let userExist = restaurant.blockList.filter(f => f == req.body.id);
+        if(userExist.length){
+          restaurant.blockList = restaurant.blockList.filter(f => f != req.body.id)
+        } else {
+          restaurant.blockList.push(req.body.id)
+        }
 
-  });
+        restaurant.save(function(err) {
+          if (err) {
+            ResponseHandler(res, 500, null, err)
+          } else
+            ResponseHandler(res, 200, restaurant)
+        });
+      }
+
+    });
+  } else {
+    ResponseHandler(res, 404)
+  }
+
 };
